@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  db:
+    restart: always
+    image: hypriot/rpi-mysql:latest
+    volumes:
+      - ${MYSQL_FOLDER_DATA}:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PWD}"
+
+  php:
+    restart: always
+    build: 
+      context: ./rpi-php7-fpm
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    volumes:
+      # - ${PHP7FPM_FILE_PHP_INI}:/usr/local/etc/php/php.ini
+      - ${PHP7FPM_FOLDER_ETC}:/usr/local/etc/
+      - ${WWW_FOLDER}:/var/www/
+
+  nginx:
+    restart: always
+    image: nginx:latest
+    depends_on:
+      - php
+    ports:
+      - "${NGINX_EXPOSE_PORT_HTTP}:80"
+      - "${NGINX_EXPOSE_PORT_HTTPS}:443"
+    volumes:
+      - ${NGINX_FOLDER_CONFIG}:/etc/nginx/conf.d
+      - ${NGINX_FOLDER_LOGS}:/var/log/nginx/
+      - ${WWW_FOLDER}:/var/www/
