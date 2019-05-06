@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  redis:
+    restart: always
+    # container_name: redis-dev1
+    image: "redis:alpine"
+    command: redis-server --requirepass ${REDISCLI_AUTH}
+    ports:
+      - "${REDIS_EXPOSE_PORT}:6379"
+    environment:
+      - REDISCLI_AUTH=${REDISCLI_AUTH}
+    volumes:
+      - data-redis:/data
+
+volumes:
+  data-redis:
+    driver: local
