@@ -1,0 +1,10 @@
+TRANSMISSION_HOST=your-bt-hostname
+TRANSMISSION_EXPOSE_PORT=51413
+TRANSMISSION_WEB_EXPOSE_PORT=9091
+
+# Do not quote the folder path
+TRANSMISSION_FOLDER_CONFIG=/path/to/transmission/config
+TRANSMISSION_FOLDER_DOWNLOADS=/path/to/transmission/download
+TRANSMISSION_FOLDER_FILES=/path/to/transmission/files
+TRANSMISSION_FOLDER_WATCH=/path/to/transmission/Watch
+TRANSMISSION_FOLDER_INCOMPLETE=/path/to/transmission/incomplete

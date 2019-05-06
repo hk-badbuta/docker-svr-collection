@@ -1,0 +1,17 @@
+version: '2'
+
+services:
+  transmission:
+    restart: always
+    image: "traffsh0w/transmission-rpi3:latest"
+    network_mode: "bridge"
+    hostname: "${TRANSMISSION_HOST}"
+    ports:
+      - "${TRANSMISSION_WEB_EXPOSE_PORT}:9091"
+      - "${TRANSMISSION_EXPOSE_PORT}:51413"
+    volumes:
+      - "${TRANSMISSION_FOLDER_CONFIG}:/root/.config/transmission-daemon"
+      - "${TRANSMISSION_FOLDER_DOWNLOADS}:/downloads"
+      - "${TRANSMISSION_FOLDER_FILES}:/files"
+      - "${TRANSMISSION_FOLDER_WATCH}:/watchdir"
+      - "${TRANSMISSION_FOLDER_INCOMPLETE}:/incomplete"
