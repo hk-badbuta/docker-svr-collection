@@ -1,0 +1,16 @@
+# COMMON
+WWW_FOLDER=/path/to/websites/
+
+# MYSQL
+MYSQL_ROOT_PWD=the_password
+MYSQL_FOLDER_DATA=/path/to/mysql/data/
+
+# PHP7-FPM
+PHP7FPM_FILE_PHP_INI=/path/to/php-fpm/php.ini
+PHP7FPM_FOLDER_ETC=/path/to/php-fpm/etc/
+
+# NGINX
+NGINX_EXPOSE_PORT_HTTP=80
+NGINX_EXPOSE_PORT_HTTPS=443
+NGINX_FOLDER_CONFIG=/path/to/nginx/conf.d
+NGINX_FOLDER_LOGS=/path/to/nginx/logs
