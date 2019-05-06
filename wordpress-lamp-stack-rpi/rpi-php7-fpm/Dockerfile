@@ -1,8 +1,8 @@
 FROM shaula/rpi-php7-fpm
 
-MAINTAINER BadBUTA <badbuta@gmail.com>
+MAINTAINER BadBUTA <badbuta@hotmail.com>
 LABEL Vendor="badbuta"
-LABEL Description="PHP-FPM 7 for badbuta.com website"
+LABEL Description="PHP-FPM 7 for wordpress website"
 LABEL Version="v1.0"
 
 # install PHP extensions & PECL modules with dependencies
@@ -34,8 +34,8 @@ RUN apt-get update && apt-get install -y \
        ssmtp
 
 # Install mcrypt
-RUN apt-get install -y libmcrypt-dev
-RUN docker-php-ext-install mcrypt
+RUN apt-get install -y libmcrypt-dev \
+    && docker-php-ext-install mcrypt
 
 # Install GD
 RUN apt-get install -y \
@@ -43,16 +43,16 @@ RUN apt-get install -y \
         libjpeg62-turbo-dev \
         libpng12-dev \
     && docker-php-ext-configure gd \
-          --enable-gd-native-ttf \
-          --with-freetype-dir=/usr/include/freetype2 \
-          --with-png-dir=/usr/include \
-          --with-jpeg-dir=/usr/include \
+        --enable-gd-native-ttf \
+        --with-freetype-dir=/usr/include/freetype2 \
+        --with-png-dir=/usr/include \
+        --with-jpeg-dir=/usr/include \
     && docker-php-ext-install gd \
     && docker-php-ext-enable gd
 
 # Install Imagick
 RUN apt-get install -y \
-       libmagickwand-dev \
+        libmagickwand-dev \
     && pecl install imagick \
     && docker-php-ext-enable imagick
 
@@ -61,5 +61,5 @@ RUN docker-php-ext-install exif \
     && docker-php-ext-enable exif
 
 # Finallly
-RUN  apt-get clean \
- && rm -rf /var/lib/apt/lists/*
+RUN apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
